@@ -76,3 +76,7 @@ def customer_can_afford_pet(customer, pet)
     return true
   end
 end
+
+def sell_pet_to_customer(pet_shop, pet_name, customer)
+  
+end
