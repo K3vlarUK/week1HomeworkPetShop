@@ -78,6 +78,7 @@ def customer_can_afford_pet(customer, pet)
 end
 
 def sell_pet_to_customer(pet_shop, pet_name, customer)
+  # This is terrible coding i think but it passes the first test....
   if customer_can_afford_pet(customer, pet_name)
     remove_customer_cash(customer, pet_name[:price])
     add_pet_to_customer(customer, pet_name)
