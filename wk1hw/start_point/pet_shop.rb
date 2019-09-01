@@ -80,13 +80,11 @@ end
 def sell_pet_to_customer(pet_shop, pet_name, customer)
   # This took me more time than the whole thing combined i think...
   if pet_name.is_a? Hash
-    if find_pet_by_name(pet_shop, pet_name[:name])
       if customer_can_afford_pet(customer, pet_name)
         remove_customer_cash(customer, pet_name[:price])
         add_pet_to_customer(customer, pet_name)
         increase_pets_sold(pet_shop, 1)
         add_or_remove_cash(pet_shop, pet_name[:price])
       end
-    end
   end
 end
