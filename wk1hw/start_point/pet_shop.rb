@@ -35,10 +35,10 @@ end
 def find_pet_by_name(pet_shop, pet_name)
   for pet in pet_shop[:pets]
     if pet[:name] == pet_name
-      name_of_pet = pet
+      return pet
     end
   end
-  return name_of_pet
+  return nil
 end
 
 def remove_pet_by_name(pet_shop, pet_name)
@@ -79,37 +79,12 @@ end
 
 def sell_pet_to_customer(pet_shop, pet_name, customer)
   # This is terrible coding i think but it passes the first test....
-  if customer_can_afford_pet(customer, pet_name)
-    remove_customer_cash(customer, pet_name[:price])
-    add_pet_to_customer(customer, pet_name)
-    increase_pets_sold(pet_shop, 1)
-    add_or_remove_cash(pet_shop, pet_name[:price])
+  if find_pet_by_name(pet_shop, pet_name[:name])
+    if customer_can_afford_pet(customer, pet_name)
+      remove_customer_cash(customer, pet_name[:price])
+      add_pet_to_customer(customer, pet_name)
+      increase_pets_sold(pet_shop, 1)
+      add_or_remove_cash(pet_shop, pet_name[:price])
+    end
   end
 end
-
-# Attempt 1
-#
-# for pet in pet_shop[:pets]
-#   if find_pet_by_name(pet_shop, pet_name)
-#     if customer_can_afford_pet(customer, pet_name)
-#       remove_customer_cash(customer, pet_name[:price])
-#       add_pet_to_customer(customer, pet_name)
-#       increase_pets_sold(pet_shop[:admin][:pet_sold], 1)
-#       add_or_remove_cash(pet_shop, pet_name[:price])
-#     end
-#   end
-# end
-
-# Attemp 2
-#
-# sold_pet = []
-# for pet in pet_shop[:pets]
-#   if pet[:name] == pet_name
-#     sold_pet.push(pet)
-#     return sold_pet
-#   end
-# end
-# return sold_pet
-# if customer_can_afford_pet(customer, sold_pet[:price])
-#   add_pet_to_customer(customer, sold_pet)
-# end
