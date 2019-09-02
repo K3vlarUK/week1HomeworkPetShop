@@ -77,14 +77,21 @@ def customer_can_afford_pet(customer, pet)
   end
 end
 
-def sell_pet_to_customer(pet_shop, pet_name, customer)
-  # This took me more time than the whole thing combined i think...
-  if pet_name.is_a? Hash
-      if customer_can_afford_pet(customer, pet_name)
-        remove_customer_cash(customer, pet_name[:price])
-        add_pet_to_customer(customer, pet_name)
+def sell_pet_to_customer(pet_shop, pet, customer)
+  # Check if the oet_name varied is a hash and not nil.
+  if pet.is_a? Hash
+    # Check if the customer can afford the pet.
+      if customer_can_afford_pet(customer, pet)
+        # Remove the cost of the pet from customer.
+        remove_customer_cash(customer, pet[:price])
+        # Add the pet hash to the customer.
+        add_pet_to_customer(customer, pet)
+        # Increase the pets that have been sold by shop.
         increase_pets_sold(pet_shop, 1)
-        add_or_remove_cash(pet_shop, pet_name[:price])
+        # Alter the cash that the store has.
+        add_or_remove_cash(pet_shop, pet[:price])
+        # Remove the pet from the pet shop after sold.
+        remove_pet_by_name(pet_shop, pet)
       end
   end
 end
